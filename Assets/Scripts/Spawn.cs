@@ -16,15 +16,17 @@ public class Spawn : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+       
         if (timer < spawnRate)
         {
             timer += Time.deltaTime;
             //Debug.Log(Random.Next(0, 2));
         }
-        else 
+        else
         {
             obstSpawner();
         }
+       
     }
     void obstSpawner()
     {
