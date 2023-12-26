@@ -12,6 +12,7 @@ public class movement : MonoBehaviour
     [SerializeField] private Transform ground;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private bool ZoomCollide;
+    [SerializeField] private Cooldown cooldown;
     public float RotationTime;
     private float percentage;
     private bool gSwitch = false;
@@ -58,14 +59,14 @@ public class movement : MonoBehaviour
         }
 
 
-
+        if (cooldown.IsCoolingDown) return;
         if (Input.GetKeyDown(KeyCode.W) && Ninja.gravityScale > 0 )
         {
             Ninja.velocity = new Vector2(Ninja.velocity.x,gSwitchForce);
             Ninja.gravityScale *= -1;
             gSwitch = true;
             transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
-          
+            cooldown.StartCooldown();
         }
 
         if (gSwitch == true && Ninja.gravityScale < 0)
@@ -73,8 +74,9 @@ public class movement : MonoBehaviour
             transform.rotation = Quaternion.Euler(transform.eulerAngles.x, transform.eulerAngles.y, 180);
             gSwitch = false;
         }
+        
 
-
+        if (cooldown.IsCoolingDown) return;
         if (Input.GetKeyDown(KeyCode.S) && Ninja.gravityScale < 0 )
         {
             Ninja.gravityScale *= -1;
@@ -82,7 +84,7 @@ public class movement : MonoBehaviour
             gSwitchDown = true;
             transform.rotation = Quaternion.Euler(transform.eulerAngles.x, transform.eulerAngles.y, Mathf.Lerp(transform.eulerAngles.z, 180, percentage));
             transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
-
+            cooldown.StartCooldown();
         }
 
         if (gSwitchDown == true && Ninja.gravityScale > 0)
@@ -90,7 +92,7 @@ public class movement : MonoBehaviour
             transform.rotation = Quaternion.Euler(transform.eulerAngles.x, transform.eulerAngles.y,0);
             gSwitchDown = false;
         }
-
+        
     }
     private bool isGrounded()
     {
