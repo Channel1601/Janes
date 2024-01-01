@@ -1207,7 +1207,7 @@ MonoBehaviour:
     m_Bits: 8
   ZoomCollide: 1
   cooldown:
-    cooldownTime: 2
+    cooldownTime: 1
   RotationTime: 0.5
   animator: {fileID: 1911793210}
 --- !u!114 &1911793209
