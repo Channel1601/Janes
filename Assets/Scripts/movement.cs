@@ -19,7 +19,8 @@ public class movement : MonoBehaviour
     private bool gSwitchDown = false;
     public Animator animator;
 
-     // Update is called once per frame
+
+    // Update is called once per frame
     void Update()
     {
         animator.SetBool("isGrounded", isGrounded());
@@ -53,16 +54,17 @@ public class movement : MonoBehaviour
         }
 
 
-        if (cooldown.IsCoolingDown) return;
-
+        if (cooldown.IsCoolingDown) return;      
 
         if (Input.GetKeyDown(KeyCode.W) && Ninja.gravityScale > 0 )
         {
+
             Ninja.velocity = new Vector2(Ninja.velocity.x,gSwitchForce);
             Ninja.gravityScale *= -1;
             gSwitch = true;
             transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
             cooldown.StartCooldown();
+
         }
 
         if (gSwitch == true && Ninja.gravityScale < 0)
@@ -75,12 +77,14 @@ public class movement : MonoBehaviour
         if (cooldown.IsCoolingDown) return;
         if (Input.GetKeyDown(KeyCode.S) && Ninja.gravityScale < 0 )
         {
+  
             Ninja.gravityScale *= -1;
             Ninja.velocity = new Vector2(Ninja.velocity.x, -1 * gSwitchForce);
             gSwitchDown = true;
             transform.rotation = Quaternion.Euler(transform.eulerAngles.x, transform.eulerAngles.y, Mathf.Lerp(transform.eulerAngles.z, 180, percentage));
             transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
             cooldown.StartCooldown();
+  
         }
 
         if (gSwitchDown == true && Ninja.gravityScale > 0)
