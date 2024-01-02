@@ -19,13 +19,7 @@ public class movement : MonoBehaviour
     private bool gSwitchDown = false;
     public Animator animator;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
+     // Update is called once per frame
     void Update()
     {
         animator.SetBool("isGrounded", isGrounded());
@@ -60,6 +54,8 @@ public class movement : MonoBehaviour
 
 
         if (cooldown.IsCoolingDown) return;
+
+
         if (Input.GetKeyDown(KeyCode.W) && Ninja.gravityScale > 0 )
         {
             Ninja.velocity = new Vector2(Ninja.velocity.x,gSwitchForce);
@@ -99,5 +95,8 @@ public class movement : MonoBehaviour
         return Physics2D.OverlapCircle(ground.position, 0.5f, groundLayer);
     }    
     
-
+    public bool canAttack()
+    {
+        return isGrounded();
+    }
 }
