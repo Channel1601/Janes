@@ -16,5 +16,7 @@ public class ObstacleMovement : MonoBehaviour
     {
         //transform.position = new Vector3(12,(Random.Next(0,2), 0);
         transform.position = transform.position + (Vector3.left * speed * Time.deltaTime);
+
     }
 }
+

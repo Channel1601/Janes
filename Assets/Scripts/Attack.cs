@@ -33,7 +33,7 @@ public class Attack : MonoBehaviour
     {
         hit = true;
         boxCollide.enabled = false;
-        animate.SetTrigger("slash");
+     //   animate.SetTrigger("slash");
     }
 
     //followed a tuto so name isnt accurate 
@@ -48,8 +48,8 @@ public class Attack : MonoBehaviour
         float localScaleX = transform.localScale.x;
         if (Mathf.Sign(localScaleX) != _direction)
         {
-            localScaleX *= -1;
-            transform.rotation = Quaternion.Euler(transform.eulerAngles.x, transform.eulerAngles.y, 180);
+            localScaleX = -localScaleX;
+            transform.rotation = Quaternion.Euler(transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z + 180);
         }
 
         transform.localScale = new Vector3(localScaleX, transform.localScale.y, transform.localScale.z);

@@ -21,17 +21,18 @@ public class PlayerAttack : MonoBehaviour
     {
         if (Input.GetMouseButton(0) && cooldownTimer > attackCooldown && movement.canAttack())
         {
-            Attack();
+            StartCoroutine(Attack());
         }
         cooldownTimer += Time.deltaTime;
 
     }
 
-    private void Attack()
+    private IEnumerator Attack()
     {
         animator.SetTrigger("attack");
         cooldownTimer = 0;
 
+        yield return new WaitForSeconds(0.15f);
         //poll attack
         shurikens[FindFireball()].transform.position = firePoint.position;
         shurikens[FindFireball()].GetComponent<Attack>().SetDirection(Mathf.Sign(transform.localScale.x));
