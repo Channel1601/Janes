@@ -33,7 +33,7 @@ public class Attack : MonoBehaviour
     {
         hit = true;
         boxCollide.enabled = false;
-     //   animate.SetTrigger("slash");
+        animate.SetTrigger("slash");
     }
 
     //followed a tuto so name isnt accurate 

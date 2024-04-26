@@ -29,7 +29,8 @@ public class Health : MonoBehaviour
             if (!dead)
             {
                 anim.SetTrigger("dead");
-                GetComponent<movement>().enabled = false; 
+                GetComponent<movement>().enabled = false;
+                GetComponent<ObstacleMovement>().enabled = false; 
                 dead = true;
             }
            
