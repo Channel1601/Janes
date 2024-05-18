@@ -171,10 +171,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb1c7383b1a4cba4c916767b77e4898a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackCooldown: 2
+  attackCooldown: 1
   range: 2.75
   colliderDistance: 5
-  damage: 2
+  damage: 1
   boxCollider: {fileID: 4765045684696668836}
   playerLayer:
     serializedVersion: 2

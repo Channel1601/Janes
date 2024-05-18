@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 
 public class Health : MonoBehaviour
 {
@@ -30,11 +30,15 @@ public class Health : MonoBehaviour
             {
                 anim.SetTrigger("dead");
                 GetComponent<movement>().enabled = false;
-                GetComponent<ObstacleMovement>().enabled = false; 
                 dead = true;
             }
            
         }
+    }
+
+    private void restart(){
+        Debug.Log("Dead");
+        SceneManager.LoadScene("Level");
     }
 
  }
