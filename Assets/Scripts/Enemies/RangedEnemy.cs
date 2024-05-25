@@ -1,12 +1,19 @@
+using System.Collections;
+using System.Collections.Generic;
+using System.Xml.Serialization;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class RangedEnemy : MonoBehaviour
 {
-
+    
     [Header ("Attack Parameters")]
     [SerializeField] private float attackCooldown;
     [SerializeField] private float range;
     [SerializeField] private int damage;
+
+    [Header ("Ranged Attack")]
+    [SerializeField] private Transform firepoint;
+    [SerializeField] private GameObject[] fireball;
 
     [Header ("Collider Parameters")]
     [SerializeField] private float colliderDistance;
@@ -18,9 +25,8 @@ public class Enemy : MonoBehaviour
 
     //References
     private Animator anim;
-    private Health playerHealth;
 
-    private void Awake()
+     private void Awake()
     {
         anim = GetComponent<Animator>();
     }
@@ -35,7 +41,7 @@ public class Enemy : MonoBehaviour
             if(cooldownTimer >= attackCooldown)
             {
                 cooldownTimer = 0;
-                anim.SetTrigger("closeAttack");
+                anim.SetTrigger("attack");
             }
         }
     }
@@ -43,10 +49,7 @@ public class Enemy : MonoBehaviour
     private bool PlayerInSight()
     {
         RaycastHit2D hit = Physics2D.BoxCast(boxCollider.bounds.center + transform.right *range * transform.localScale.x * colliderDistance,
-        new Vector3(boxCollider.bounds.size.x * range, boxCollider.bounds.size.y-1 ,boxCollider.bounds.size.z  ), 0, Vector2.left, 0, playerLayer);
-
-        if(hit.collider != null)
-            playerHealth = hit.transform.GetComponent<Health>();
+        new Vector3(boxCollider.bounds.size.x * range, boxCollider.bounds.size.y ,boxCollider.bounds.size.z  ), 0, Vector2.left, 0, playerLayer);
 
         return hit.collider != null;
     }
@@ -55,21 +58,21 @@ public class Enemy : MonoBehaviour
     {
             Gizmos.color = Color.red;
             Gizmos.DrawWireCube(boxCollider.bounds.center + transform.right *range * transform.localScale.x * colliderDistance,
-            new Vector3(boxCollider.bounds.size.x * range, boxCollider.bounds.size.y-1 ,boxCollider.bounds.size.z  ));
+            new Vector3(boxCollider.bounds.size.x * range, boxCollider.bounds.size.y ,boxCollider.bounds.size.z  ));
     }
 
-    private void DamagePlayer()
-    {
-        if(PlayerInSight()){
-            playerHealth.TakeDamage(damage);
-            GetComponent<Health>().TakeDamage(2);
-            GetComponentInParent<EnemyPatrol>().enabled = false;
-            GetComponent<Enemy>().enabled = false;
-            anim.SetTrigger("dead");
+    private void RangedAttack(){
+        cooldownTimer = 0;
+
+        fireball[FindFireball()].transform.position = firepoint.position;
+        fireball[FindFireball()].GetComponent<EnemyProjectile>().ActivateProjectile();
+    }
+
+    private int FindFireball(){
+        for(int i = 0; i < fireball.Length; i++){
+            if(!fireball[i].activeInHierarchy)
+                return i;
         }
-    }
-
-    private void RemoveCollider(){
-        GetComponent<BoxCollider2D>().enabled = false;
+        return 0;
     }
 }

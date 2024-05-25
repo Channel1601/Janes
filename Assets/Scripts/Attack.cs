@@ -34,6 +34,9 @@ public class Attack : MonoBehaviour
         hit = true;
         boxCollide.enabled = false;
         animate.SetTrigger("slash");
+
+        if(collision.tag == "Enemy")
+            collision.GetComponent<Health>().TakeDamage(1);
     }
 
     //followed a tuto so name isnt accurate 
