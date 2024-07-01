@@ -1,11 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.SocialPlatforms;
 
 public class Health : MonoBehaviour
 {
+    [Header("Audio")]
+    [SerializeField] private AudioClip deathSound;
+
+    [Header("Other")]
     [SerializeField] private float startingHealth;
+
+    private UIManager uiManager;  
+    
     public float currentHealth { get; private set; }
     private Animator anim;
     private bool dead;
@@ -14,6 +20,7 @@ public class Health : MonoBehaviour
     {
         currentHealth = startingHealth;
         anim = GetComponent<Animator>();
+        uiManager = FindObjectOfType<UIManager>(); 
     }
 
     public void TakeDamage(float _damage)
@@ -24,6 +31,7 @@ public class Health : MonoBehaviour
         {
             anim.SetTrigger("hurt");
         }
+        
         else
         {
             if (!dead)
@@ -31,25 +39,42 @@ public class Health : MonoBehaviour
                 anim.SetTrigger("dead");
 
                 //Player
-                if(GetComponent<movement>() != null)
+                if(GetComponent<movement>() != null){
                     GetComponent<movement>().enabled = false;
-
+                    uiManager.GameOver();
+                    ObstacleMovement[] scripts = FindObjectsOfType<ObstacleMovement>();
+                    foreach (ObstacleMovement script in scripts)
+                    {
+                        script.enabled = false;
+                    }
+                }
                 //Enemy
                 if(GetComponentInParent<EnemyPatrol>() != null)
                     GetComponentInParent<EnemyPatrol>().enabled = false;
                 
-                if(GetComponent<Enemy>() != null)
-                    GetComponent<Enemy>().enabled = false;
+                if(GetComponent<RangedEnemy>() != null)
+                    GetComponent<RangedEnemy>().enabled = false;
 
                 dead = true;
+                SoundManager.instance.PlaySound(deathSound);
             }
            
         }
     }
 
-    private void restart(){
-        Debug.Log("Dead");
-        SceneManager.LoadScene("Level");
+    public void AddHealth(float _value){
+        currentHealth = Mathf.Clamp(currentHealth + _value, 0, startingHealth);
     }
 
+    private void Deactivate(){
+        gameObject.SetActive(false);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Death"))
+        {
+            TakeDamage(2);
+        }          
+     }
  }

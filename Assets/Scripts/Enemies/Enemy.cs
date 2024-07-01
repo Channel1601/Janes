@@ -13,9 +13,12 @@ public class Enemy : MonoBehaviour
     [SerializeField] private BoxCollider2D boxCollider;
 
     [Header ("Player Layer")]
-    [SerializeField] private LayerMask playerLayer; 
+    [SerializeField] private LayerMask playerLayer;
     private float cooldownTimer = Mathf.Infinity;
-
+    
+    [Header ("Attack Sound")]
+    [SerializeField] private AudioClip meleeSound;
+    
     //References
     private Animator anim;
     private Health playerHealth;
@@ -32,10 +35,11 @@ public class Enemy : MonoBehaviour
         if(PlayerInSight())
         {
             Debug.Log("Found");
-            if(cooldownTimer >= attackCooldown)
+            if(cooldownTimer >= attackCooldown && playerHealth.currentHealth > 0)
             {
                 cooldownTimer = 0;
                 anim.SetTrigger("closeAttack");
+                SoundManager.instance.PlaySound(meleeSound);
             }
         }
     }

@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 4765045684696668837}
   - component: {fileID: 4765045684696668838}
   - component: {fileID: 3663357378009383461}
+  - component: {fileID: 5861396992127309219}
   m_Layer: 7
   m_Name: Jack'O 1
   m_TagString: Enemy
@@ -158,7 +159,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d02ab48f24f10f4593a03a5edfb7512, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deathSound: {fileID: 0}
   startingHealth: 2
+  obstacleMovement: {fileID: 4765045684696668832}
 --- !u!114 &4765045684696668838
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -173,12 +176,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackCooldown: 1
   range: 2.75
-  colliderDistance: 5
   damage: 1
+  colliderDistance: 5
   boxCollider: {fileID: 4765045684696668836}
   playerLayer:
     serializedVersion: 2
     m_Bits: 64
+  meleeSound: {fileID: 0}
 --- !u!61 &3663357378009383461
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -205,3 +209,16 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 7.6602783, y: 16.031416}
   m_EdgeRadius: 0
+--- !u!114 &5861396992127309219
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4765045684696668835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d3ec53010163054aa123303e817cf7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 1
