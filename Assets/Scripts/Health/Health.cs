@@ -1,6 +1,5 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.SocialPlatforms;
+using System.Collections;
 
 public class Health : MonoBehaviour
 {
@@ -9,7 +8,7 @@ public class Health : MonoBehaviour
 
     [Header("Other")]
     [SerializeField] private float startingHealth;
-
+    
     private UIManager uiManager;  
     
     public float currentHealth { get; private set; }
@@ -41,12 +40,12 @@ public class Health : MonoBehaviour
                 //Player
                 if(GetComponent<movement>() != null){
                     GetComponent<movement>().enabled = false;
-                    uiManager.GameOver();
                     ObstacleMovement[] scripts = FindObjectsOfType<ObstacleMovement>();
                     foreach (ObstacleMovement script in scripts)
                     {
                         script.enabled = false;
                     }
+                    StartCoroutine(GameOverShow());
                 }
                 //Enemy
                 if(GetComponentInParent<EnemyPatrol>() != null)
@@ -58,7 +57,6 @@ public class Health : MonoBehaviour
                 dead = true;
                 SoundManager.instance.PlaySound(deathSound);
             }
-           
         }
     }
 
@@ -77,4 +75,11 @@ public class Health : MonoBehaviour
             TakeDamage(2);
         }          
      }
+
+    private IEnumerator GameOverShow()
+    {
+        yield return new WaitForSeconds(0.75f);
+        uiManager.GameOver();
+     }
+
  }

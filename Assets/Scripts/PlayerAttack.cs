@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
@@ -21,12 +20,13 @@ public class PlayerAttack : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButton(0) && cooldownTimer > attackCooldown && movement.canAttack())
+        if (Input.GetMouseButton(1) && cooldownTimer > attackCooldown && movement.canAttack())
         {
             StartCoroutine(Attack());
         }
         cooldownTimer += Time.deltaTime;
 
+        
     }
 
     private IEnumerator Attack()
@@ -52,5 +52,14 @@ public class PlayerAttack : MonoBehaviour
         }
         
         return 0;
+    }
+
+    public void Shuriken()
+    {
+        if (cooldownTimer > attackCooldown && movement.canAttack())
+        {
+            StartCoroutine(Attack());
+        }
+        cooldownTimer += Time.deltaTime;
     }
 }
