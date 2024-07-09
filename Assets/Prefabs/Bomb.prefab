@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 8563310967518968026}
   - component: {fileID: 3612084138114352098}
   - component: {fileID: 8667129574474373203}
-  - component: {fileID: 4085373173583266901}
   - component: {fileID: 5577595478083059719}
   m_Layer: 0
   m_Name: Bomb
@@ -133,25 +132,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!95 &4085373173583266901
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2800371649186619812}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 93ef90bd8bc96ee459315a8a2b2dfc52, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &5577595478083059719
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -165,5 +145,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 1
-  speed: 30
-  resetTime: 1
+  speed: 25
+  resetTime: 5
