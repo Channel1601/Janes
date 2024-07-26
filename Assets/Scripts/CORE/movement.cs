@@ -12,6 +12,10 @@ public class movement : MonoBehaviour
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private Cooldown cooldown;
 
+    [Header("Switch Buttons")]
+    [SerializeField] private GameObject switchUp;
+    [SerializeField] private GameObject switchDown;
+    
     public float RotationTime;
     private bool gSwitch = false;
     private bool gSwitchDown = false;
@@ -138,7 +142,8 @@ public class movement : MonoBehaviour
             Ninja.gravityScale *= -1;
             gSwitch = true;
             cooldown.StartCooldown();
-
+            switchUp.SetActive(false);
+            switchDown.SetActive(true);
         }
 
         if (gSwitch == true && Ninja.gravityScale < 0)
@@ -159,7 +164,8 @@ public class movement : MonoBehaviour
             Ninja.velocity = new Vector2(Ninja.velocity.x, -1 * gSwitchForce);
             gSwitchDown = true;
             cooldown.StartCooldown();
-
+            switchUp.SetActive(true);
+            switchDown.SetActive(false);
         }
 
         if (gSwitchDown == true && Ninja.gravityScale > 0)
