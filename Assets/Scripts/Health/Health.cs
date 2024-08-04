@@ -73,6 +73,7 @@ public class Health : MonoBehaviour
         if (collision.gameObject.CompareTag("Death"))
         {
             TakeDamage(2);
+            gameObject.GetComponent<Renderer>().enabled = false;
         }          
      }
 

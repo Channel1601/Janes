@@ -8,11 +8,11 @@ public class LevelSelect : MonoBehaviour
     [SerializeField] private Button playButton;
 
     [Header("Level Images")]
-    [SerializeField] private GameObject level1Image;
+    [SerializeField] private GameObject level1Cover;
 
     private void Awake()
     {
-        level1Image.gameObject.SetActive(false);
+        level1Cover.gameObject.SetActive(true);
         playButton.interactable = false; 
     }
 
@@ -24,7 +24,7 @@ public class LevelSelect : MonoBehaviour
     #region Level 1
     public void Level1Select()
     {
-        level1Image.gameObject.SetActive(true);
+        level1Cover.gameObject.SetActive(false);
         playButton.interactable = true; 
     }
 
