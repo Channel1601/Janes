@@ -24,7 +24,7 @@ public class Attack : MonoBehaviour
         transform.Translate(movementSpeed, 0, 0);
 
         lifetime += Time.deltaTime;
-        if (lifetime > 3) gameObject.SetActive(false);
+        if (lifetime > 1.5f) gameObject.SetActive(false);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

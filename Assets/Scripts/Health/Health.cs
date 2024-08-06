@@ -7,13 +7,14 @@ public class Health : MonoBehaviour
     [SerializeField] private AudioClip deathSound;
 
     [Header("Other")]
-    [SerializeField] private float startingHealth;
+    [SerializeField] public float startingHealth;
     
     private UIManager uiManager;  
     
     public float currentHealth { get; private set; }
     private Animator anim;
     private bool dead;
+    public bool canHurt = false;
 
     private void Awake()
     {
@@ -24,6 +25,8 @@ public class Health : MonoBehaviour
 
     public void TakeDamage(float _damage)
     {
+        if(canHurt) return;
+
         currentHealth = Mathf.Clamp(currentHealth - _damage, 0, startingHealth);
 
         if (currentHealth > 0)

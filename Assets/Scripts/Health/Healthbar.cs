@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,11 +9,11 @@ public class Healthbar : MonoBehaviour
 
     private void Start()
     {
-        totalhealthBar.fillAmount = playerHealth.currentHealth / 2;
+        totalhealthBar.fillAmount = playerHealth.currentHealth / playerHealth.startingHealth;
     }
 
     private void Update()
     {
-        currenthealthBar.fillAmount = playerHealth.currentHealth / 2;
+        currenthealthBar.fillAmount = playerHealth.currentHealth / playerHealth.startingHealth;
     }
 }
