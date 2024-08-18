@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4019609590977896401}
   - component: {fileID: 4019609590977896400}
-  - component: {fileID: 3880631556871442441}
   - component: {fileID: 8927130887437273302}
+  - component: {fileID: 4753324301660937602}
   m_Layer: 3
   m_Name: Obstacle Upright
   m_TagString: ZoomOut
@@ -84,18 +84,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3880631556871442441
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4019609590977896402}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c9f11c60a056de74393fef19952cef95, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!61 &8927130887437273302
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -122,3 +110,15 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 11.4, y: 4.3}
   m_EdgeRadius: 0
+--- !u!114 &4753324301660937602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4019609590977896402}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9f11c60a056de74393fef19952cef95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

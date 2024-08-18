@@ -38,7 +38,6 @@ public class RangedEnemy : MonoBehaviour
         
         if(PlayerInSight())
         {
-            Debug.Log("FOund");
             if(cooldownTimer >= attackCooldown && playerHealth.currentHealth > 0)
             {
                 cooldownTimer = 0;
