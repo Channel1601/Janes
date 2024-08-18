@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 4765045684696668838}
   - component: {fileID: 3663357378009383461}
   - component: {fileID: 5861396992127309219}
+  - component: {fileID: 4986186270473320130}
   m_Layer: 7
   m_Name: Jack'O 1
   m_TagString: Enemy
@@ -161,7 +162,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deathSound: {fileID: 0}
   startingHealth: 2
-  obstacleMovement: {fileID: 4765045684696668832}
+  canHurt: 0
 --- !u!114 &4765045684696668838
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -222,3 +223,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 1
+--- !u!114 &4986186270473320130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4765045684696668835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9f11c60a056de74393fef19952cef95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

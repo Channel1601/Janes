@@ -14,6 +14,8 @@ public class Health : MonoBehaviour
     public float currentHealth { get; private set; }
     private Animator anim;
     private bool dead;
+
+    [HideInInspector]
     public bool canHurt = false;
 
     private void Awake()
