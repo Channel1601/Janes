@@ -9,6 +9,7 @@ TagManager:
   - ZoomOut
   - ZoomIn
   - Enemy
+  - Block
   layers:
   - Default
   - TransparentFX

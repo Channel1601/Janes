@@ -29,12 +29,19 @@ public class Attack : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        hit = true;
-        boxCollide.enabled = false;
-        animate.SetTrigger("slash");
-
-        if(collision.tag == "Enemy")
+        if(collision.tag == "Enemy"){
             collision.GetComponent<Health>().TakeDamage(1);
+            hit = true;
+            boxCollide.enabled = false;
+            animate.SetTrigger("slash");
+        }
+
+        if(collision.tag == "Block")
+        {
+            hit = true;
+            boxCollide.enabled = false;
+            animate.SetTrigger("slash");
+        }
     }
 
     //followed a tuto so name isnt accurate 
