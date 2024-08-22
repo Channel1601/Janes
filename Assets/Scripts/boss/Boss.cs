@@ -1,5 +1,5 @@
 using System.Collections;
-using System.Runtime.CompilerServices;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class Boss : MonoBehaviour
@@ -7,6 +7,8 @@ public class Boss : MonoBehaviour
     [Header("Core")]
     public Animator anim;
     public GameObject bossBar;
+    public Image bossBarFill;
+    public GameObject stageTwoBeam;
     public Health health;
     public float stageTwoHealth;
     
@@ -26,11 +28,15 @@ public class Boss : MonoBehaviour
     public Transform FeatherPoint;
     public GameObject[] feathers;
 
+    [Header("Attack Detect")]
+    public GameObject stageOneColl;
+    public GameObject stageTwoColl;
+
     private Vector3 targetPosition;
     private float distance;
 
-    private bool shiftup;
-    private bool shiftdown;
+    [HideInInspector] public bool shiftup;
+    [HideInInspector] public bool shiftdown;
 
     void Awake()
     {
@@ -38,6 +44,8 @@ public class Boss : MonoBehaviour
         bossBar.SetActive(false);
         tornadoPrefab.SetActive(false);
         beamPrefab.SetActive(false);
+        stageTwoBeam.SetActive(false);
+        stageTwoColl.SetActive(false);
     }
 
     void Start()
@@ -49,8 +57,7 @@ public class Boss : MonoBehaviour
     {
         if(health.currentHealth == stageTwoHealth){
             anim.SetTrigger("stageTwo");
-            StopCoroutine(Attacks());
-            StartCoroutine(StageTwo());
+            StageTwo();
         }
         transform.position = Vector3.MoveTowards(transform.position, targetPosition, 20 * Time.deltaTime);
 
@@ -63,43 +70,63 @@ public class Boss : MonoBehaviour
         gameObject.SetActive(true);
         anim.SetTrigger("Spawn");
         bossBar.SetActive(true);
-        StartCoroutine(Attacks());
     }
 
-    private IEnumerator Attacks()
+    #region Attacks
+
+    public void NadoAttack()
     {
-        //Attack 1: Tornado (Goes up after)
-        yield return new WaitForSeconds(4.5f);
-        shiftup = true;
         anim.SetTrigger("tornado");
-        
+    }
 
-        //Attack 2: Beam (Goes down after)
-        yield return new WaitForSeconds(3.5f);
-        shiftdown = true;
+    public void BeamAttack()
+    {
         anim.SetTrigger("beam");
-        
+    }
 
-        //Attack 3: Tornado (Goes up again)
-        yield return new WaitForSeconds(4f);
-        shiftup = true;
-        anim.SetTrigger("tornado");
-
-        //Attack 4: Spin
-        yield return new WaitForSeconds(2.5f);
+    public void SpinAttack()
+    {
         anim.SetTrigger("spin");
-
-        //Attack 5: Beam (Goes Down)
-        yield return new WaitForSeconds(5f);
-        shiftdown = true;
-        anim.SetTrigger("beam");
     }
 
-    private IEnumerator StageTwo()
+    public IEnumerator SpinSpecial()
     {
-        yield return new WaitForSeconds(5f);
-        
+        targetPosition -= new Vector3(0f, 2.5f, 0);
+        FeatherPoint.transform.position -= new Vector3(0, 1, 0);
+        anim.SetTrigger("spin");   
+
+        yield return new WaitForSeconds(3.8f);
+        targetPosition += new Vector3(0f, 2.5f, 0);
+        FeatherPoint.transform.position += new Vector3(0, 1, 0);
     }
+
+    private void StageTwo()
+    {
+       Destroy(stageOneColl);
+       stageTwoColl.SetActive(true);        
+    }
+    #endregion
+
+    #region other
+    private void ChangeColour()
+    {
+        Color newColor;
+        if (ColorUtility.TryParseHtmlString("#930000", out newColor))
+        {
+            bossBarFill.color = newColor;
+        }
+    }
+
+    private void startBeam()
+    {
+        stageTwoBeam.SetActive(true);
+    }
+
+    private void stopBeam()
+    {
+        stageTwoBeam.SetActive(false);
+    }
+    #endregion
 
     #region attacks
     private void tornadoAttack()
@@ -151,4 +178,5 @@ public class Boss : MonoBehaviour
         targetPosition = new Vector3(ninjaPos.position.x + maxDistance, transform.position.y, 0);
     }
     #endregion
+
 }
