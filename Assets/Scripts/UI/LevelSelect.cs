@@ -30,6 +30,7 @@ public class LevelSelect : MonoBehaviour
 
     public void Level1Play()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene(2);
     }
     #endregion

@@ -4,11 +4,11 @@ public class bossSpawn : MonoBehaviour
 {
     public GameObject boss;
 
-    private ObstacleMovement obstacleMovement;
+    private BossMove bossMove;
     
     void Awake()
     {
-        obstacleMovement = GetComponentInParent<ObstacleMovement>();
+        bossMove = GetComponentInParent<BossMove>();
     }
 
     void OnTriggerEnter2D(Collider2D collide)
@@ -16,7 +16,7 @@ public class bossSpawn : MonoBehaviour
         if(collide.CompareTag("Player"))
         {            
             boss.GetComponent<Boss>().SpawnBoss();
-            obstacleMovement.enabled = false;
+            bossMove.enabled = false;
             gameObject.SetActive(false);
         }
     }

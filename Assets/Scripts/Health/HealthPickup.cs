@@ -7,7 +7,7 @@ public class HealthPickup : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision){
 
-        if (collision.tag == "Player")
+        if (collision.tag == "Player" && collision.GetComponent<Health>() != null)
         {
             SoundManager.instance.PlaySound(pickup);
             collision.GetComponent<Health>().AddHealth(healthValue);

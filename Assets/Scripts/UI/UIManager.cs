@@ -9,10 +9,21 @@ public class UIManager : MonoBehaviour
     [Header("Pause")]
     [SerializeField] private GameObject pauseScreen;
 
+    [Header("Boss")]
+    [SerializeField] private GameObject boss;
+
     private void Awake()
     {
         gameOverScreen.SetActive(false);
         pauseScreen.SetActive(false);
+    }
+
+    private void Update()
+    {
+        if(boss == null)
+        {
+            Time.timeScale = 0;
+        }
     }
 
     #region Game Over Screen

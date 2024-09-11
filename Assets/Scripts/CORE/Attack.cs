@@ -29,8 +29,9 @@ public class Attack : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == "Enemy"){
-            collision.GetComponent<Health>().TakeDamage(1);
+        if(collision.tag == "Enemy")
+        {
+            if (collision.GetComponent<Health>() != null) collision.GetComponent<Health>().TakeDamage(1);
             hit = true;
             boxCollide.enabled = false;
             animate.SetTrigger("slash");

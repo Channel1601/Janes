@@ -8,9 +8,11 @@ public class BossAttackColls : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
-        {
-            TriggerAttack();
+        if(enabled){
+            if (other.CompareTag("Player") && other.GetComponent<Health>() != null)
+            {
+                TriggerAttack();
+            }
         }
     }
 
@@ -32,7 +34,7 @@ public class BossAttackColls : MonoBehaviour
         if(attackIndex == 0 && shift == 2)
         {
             bossScript.shiftdown = true;
-            bossScript.MoveUp();
+            bossScript.MoveDown();
             return;
         }
 
@@ -47,6 +49,12 @@ public class BossAttackColls : MonoBehaviour
                 break;
             case 3:
                 bossScript.SpinAttack();
+                break;
+            case 4:
+                bossScript.LightAttack();
+                break;
+            case 5:
+                bossScript.CrowAttack();
                 break;
             default:
                 break;

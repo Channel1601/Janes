@@ -34,7 +34,6 @@ public class Enemy : MonoBehaviour
         
         if(PlayerInSight())
         {
-            Debug.Log("Found");
             if(cooldownTimer >= attackCooldown && playerHealth.currentHealth > 0)
             {
                 cooldownTimer = 0;
