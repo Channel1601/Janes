@@ -11,12 +11,13 @@ GameObject:
   - component: {fileID: 3767206549631533513}
   - component: {fileID: 3767206549631533514}
   - component: {fileID: 3767206549631533519}
-  - component: {fileID: 3767206549631533512}
   - component: {fileID: 3767206549631533516}
   - component: {fileID: 3767206549631533517}
   - component: {fileID: 3767206549631533557}
   - component: {fileID: 1102474619192789265}
   - component: {fileID: 8003744105565410669}
+  - component: {fileID: 4460912334331090238}
+  - component: {fileID: 5622404970466230341}
   m_Layer: 7
   m_Name: Xombie
   m_TagString: Enemy
@@ -109,19 +110,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &3767206549631533512
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3767206549631533515}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a28665eade745f84bbc827ff820e8841, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 10
 --- !u!61 &3767206549631533516
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -216,6 +204,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a69d518ba4aac4f44a621330753c2d5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!50 &4460912334331090238
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3767206549631533515}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!114 &5622404970466230341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3767206549631533515}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a28665eade745f84bbc827ff820e8841, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 10
 --- !u!1 &7796083032926365724
 GameObject:
   m_ObjectHideFlags: 0

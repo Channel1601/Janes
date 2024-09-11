@@ -18,8 +18,10 @@ public class EnemyProjectile : EnemyDamage
 
     new protected void OnTriggerEnter2D(Collider2D collision)
     {
-        base.OnTriggerEnter2D(collision); //Execute logic from parent script first
-        gameObject.SetActive(false); //When this hits any object deactivate 
+        if(collision.tag == "Player"){
+            base.OnTriggerEnter2D(collision); //Execute logic from parent script first
+            gameObject.SetActive(false); //When this hits any object deactivate
+        }
     }
 
     public void ActivateProjectile()

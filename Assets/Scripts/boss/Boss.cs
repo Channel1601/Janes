@@ -11,7 +11,8 @@ public class Boss : MonoBehaviour
     public GameObject stageTwoBeam;
     public Health health;
     public float stageTwoHealth;
-    
+    public GameObject endScreen;
+
     [Header("Distance")]
     public Transform ninjaPos;
     public float maxDistance;
@@ -28,12 +29,21 @@ public class Boss : MonoBehaviour
     public Transform FeatherPoint;
     public GameObject[] feathers;
 
+    [Header("Light Attack")]
+    public Transform holymoly;
+    public GameObject lightPrefab;
+
+    [Header("Crow Attack")]
+    public Transform CrowPoint;
+    public GameObject[] crows;
+
     [Header("Attack Detect")]
     public GameObject stageOneColl;
     public GameObject stageTwoColl;
 
     private Vector3 targetPosition;
     private float distance;
+    private bool specbooUp = false;
 
     [HideInInspector] public bool shiftup;
     [HideInInspector] public bool shiftdown;
@@ -44,8 +54,9 @@ public class Boss : MonoBehaviour
         bossBar.SetActive(false);
         tornadoPrefab.SetActive(false);
         beamPrefab.SetActive(false);
+        lightPrefab.SetActive(false);
         stageTwoBeam.SetActive(false);
-        stageTwoColl.SetActive(false);
+        endScreen.SetActive(false);
     }
 
     void Start()
@@ -56,9 +67,10 @@ public class Boss : MonoBehaviour
     void Update()
     {
         if(health.currentHealth == stageTwoHealth){
-            anim.SetTrigger("stageTwo");
             StageTwo();
+            anim.SetTrigger("stageTwo");
         }
+
         transform.position = Vector3.MoveTowards(transform.position, targetPosition, 20 * Time.deltaTime);
 
         distance = Mathf.Abs(transform.position.x - ninjaPos.position.x);
@@ -89,21 +101,45 @@ public class Boss : MonoBehaviour
         anim.SetTrigger("spin");
     }
 
+    public void LightAttack()
+    {
+        anim.SetTrigger("light");
+    }
+
+    public void CrowAttack()
+    {
+        anim.SetTrigger("crow");
+    }
+
     public IEnumerator SpinSpecial()
     {
         targetPosition -= new Vector3(0f, 2.5f, 0);
         FeatherPoint.transform.position -= new Vector3(0, 1, 0);
         anim.SetTrigger("spin");   
 
-        yield return new WaitForSeconds(3.8f);
+        yield return new WaitForSeconds(4f);
         targetPosition += new Vector3(0f, 2.5f, 0);
         FeatherPoint.transform.position += new Vector3(0, 1, 0);
     }
 
     private void StageTwo()
     {
-       Destroy(stageOneColl);
-       stageTwoColl.SetActive(true);        
+       Destroy(stageOneColl); 
+       if(transform.position.y <= 1f)
+       {
+        shiftup = true;
+       }
+       if(transform.position.y <= -2f)
+       {
+        specbooUp = true;
+       }
+    }
+    private void specUp()
+    {
+        if(specbooUp == true){
+            targetPosition += new Vector3(0f, 2.5f, 0);
+            FeatherPoint.transform.position += new Vector3(0, 1, 0);
+        }
     }
     #endregion
 
@@ -125,6 +161,16 @@ public class Boss : MonoBehaviour
     private void stopBeam()
     {
         stageTwoBeam.SetActive(false);
+    }
+
+    private void LevelDone()
+    {
+        endScreen.SetActive(true);
+    }
+
+    private void Remove()
+    {
+        Destroy(gameObject);
     }
     #endregion
 
@@ -154,12 +200,33 @@ public class Boss : MonoBehaviour
         }
         return 0;
     }
+
+    private void lightAttack()
+    {
+        lightPrefab.transform.position = holymoly.position;
+        lightPrefab.GetComponent<BossProjectile>().ActivateProjectile();
+    }
+
+    private void crowAttack()
+    {   
+        crows[FindCrows()].transform.position = CrowPoint.position;
+        crows[FindCrows()].GetComponent<EnemyProjectile>().ActivateProjectile();
+    }
+
+    private int FindCrows(){
+        for(int i = 0; i < crows.Length; i++){
+            if(!crows[i].activeInHierarchy)
+                return i;
+        }
+        return 0;
+    }
+
     #endregion
 
     #region moving
     public void MoveUp()
     {
-        if(shiftup){
+        if(shiftup && transform.position.y <= 1f){
             targetPosition += new Vector3(0f, 3.5f, 0);
             shiftup = false;
         }

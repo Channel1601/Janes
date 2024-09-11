@@ -50,6 +50,11 @@ public class Health : MonoBehaviour
                     {
                         script.enabled = false;
                     }
+                    DetectMovement[] scrips = FindObjectsOfType<DetectMovement>();
+                    foreach (DetectMovement script in scrips)
+                    {
+                        script.enabled = false;
+                    }
                     StartCoroutine(GameOverShow());
                 }
                 //Enemy

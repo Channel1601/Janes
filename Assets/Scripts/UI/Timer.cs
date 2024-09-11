@@ -3,7 +3,7 @@ using TMPro;
 
 public class Timer : MonoBehaviour
 {
-    private float timeDuration = 3f * 60f;
+    private float timeDuration = 2.5f * 60f;
     
     [HideInInspector]
     public float timer;
