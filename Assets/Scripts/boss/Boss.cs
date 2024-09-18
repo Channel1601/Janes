@@ -71,10 +71,16 @@ public class Boss : MonoBehaviour
             anim.SetTrigger("stageTwo");
         }
 
+        Debug.Log(transform.position.y);
         transform.position = Vector3.MoveTowards(transform.position, targetPosition, 20 * Time.deltaTime);
 
         distance = Mathf.Abs(transform.position.x - ninjaPos.position.x);
         if(distance>maxDistance) Framing();        
+
+        if(transform.position.y > 3)
+        {
+            targetPosition = new Vector3(transform.position.x, 2.5f, transform.position.z);
+        }
     }
 
     public void SpawnBoss()
@@ -123,8 +129,7 @@ public class Boss : MonoBehaviour
     }
 
     private void StageTwo()
-    {
-       Destroy(stageOneColl); 
+    { 
        if(transform.position.y <= 1f)
        {
         shiftup = true;
@@ -134,6 +139,12 @@ public class Boss : MonoBehaviour
         specbooUp = true;
        }
     }
+
+    private void CollOneGone()
+    {
+        Destroy(stageOneColl);
+    }
+    
     private void specUp()
     {
         if(specbooUp == true){

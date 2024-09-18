@@ -13,7 +13,7 @@ public class bossSpawn : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collide)
     {
-        if(collide.CompareTag("Player"))
+        if(collide.CompareTag("Player") && collide.GetComponent<Health>() != null)
         {            
             boss.GetComponent<Boss>().SpawnBoss();
             bossMove.enabled = false;

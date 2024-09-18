@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 
 public class StageTwoChecker : MonoBehaviour
@@ -18,13 +17,7 @@ public class StageTwoChecker : MonoBehaviour
         }
         if(stageOne == null)
         {
-            StartCoroutine(disable());
+            bossAttack.enabled = true;
         }
-    }
-
-    private IEnumerator disable()
-    {
-        yield return new WaitForSeconds(10f);
-        bossAttack.enabled = true;
     }
 }
