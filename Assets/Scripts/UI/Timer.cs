@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using System.Collections;
 
 public class Timer : MonoBehaviour
 {
@@ -14,9 +15,15 @@ public class Timer : MonoBehaviour
     [SerializeField] private TextMeshProUGUI firstSec;
     [SerializeField] private TextMeshProUGUI secondSec;
 
+    [SerializeField] private CanvasGroup redFlashCanvas; 
+    [SerializeField] private float flashDuration = 0.5f;
+
+    private bool isFlashing = false;
+
     void Start()
     {
         ResetTimer();
+        redFlashCanvas.alpha = 0f;
     }
 
     void Update()
@@ -24,6 +31,13 @@ public class Timer : MonoBehaviour
         if(timer > 0){
             timer -= Time.deltaTime;
             UpdateTimerDisplay(timer);
+
+            if(timer <= 5f && !isFlashing)
+            {
+                StartCoroutine(FlashRedScreen());
+                isFlashing = true; // Ensure the flash starts only once
+            }
+
         } else {
             timer = 0;
             UpdateTimerDisplay(timer);
@@ -47,4 +61,31 @@ public class Timer : MonoBehaviour
         firstSec.text = currentTime[2].ToString();
         secondSec.text = currentTime[3].ToString();
     }
+
+    private IEnumerator FlashRedScreen()
+    {
+        while(timer <= 5f)
+        {
+            // Fade in
+            float t = 0f;
+            while(t < flashDuration)
+            {
+                redFlashCanvas.alpha = Mathf.Lerp(0f, 1f, t / flashDuration);
+                t += Time.deltaTime;
+                yield return null;
+            }
+
+            // Fade out
+            t = 0f;
+            while(t < flashDuration)
+            {
+                redFlashCanvas.alpha = Mathf.Lerp(1f, 0f, t / flashDuration);
+                t += Time.deltaTime;
+                yield return null;
+            }
+        }
+
+        redFlashCanvas.alpha = 0f; // Ensure canvas is invisible after flashing
+    }
+
 }

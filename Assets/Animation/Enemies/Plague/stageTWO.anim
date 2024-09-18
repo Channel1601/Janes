@@ -202,13 +202,6 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0
-    functionName: MoveUp
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
-  - time: 0
     functionName: MoveDown
     data: 
     objectReferenceParameter: {fileID: 0}
@@ -217,6 +210,13 @@ AnimationClip:
     messageOptions: 0
   - time: 0
     functionName: specUp
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0
+    functionName: MoveUp
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
@@ -238,6 +238,13 @@ AnimationClip:
     messageOptions: 0
   - time: 8.75
     functionName: stopBeam
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 8.75
+    functionName: CollOneGone
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

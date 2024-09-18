@@ -90,6 +90,7 @@ public class Health : MonoBehaviour
     private IEnumerator GameOverShow()
     {
         yield return new WaitForSeconds(0.75f);
+        Time.timeScale = 0;
         uiManager.GameOver();
      }
 
