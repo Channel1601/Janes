@@ -178,7 +178,7 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 64
-  rangedAttack: {fileID: 0}
+  rangedAttack: {fileID: 8300000, guid: f1417f8a31b48274fb95013863c01b61, type: 3}
 --- !u!114 &1102474619192789265
 MonoBehaviour:
   m_ObjectHideFlags: 0

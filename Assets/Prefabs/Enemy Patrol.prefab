@@ -21,18 +21,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &7921701391522629945
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3871092937490214419}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a69d518ba4aac4f44a621330753c2d5a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &3599344622571035753
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -46,6 +34,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
+--- !u!114 &7921701391522629945
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3871092937490214419}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a69d518ba4aac4f44a621330753c2d5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8617696478610888630
 GameObject:
   m_ObjectHideFlags: 0
@@ -281,6 +281,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: 'Jack''O '
       objectReference: {fileID: 0}
+    - target: {fileID: 4765045684696668838, guid: 02a25a79243e4594388ffb484d86ba75, type: 3}
+      propertyPath: meleeSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 1cfbe11432197f24fb2fd0eabf148e7b, type: 3}
     m_RemovedComponents:
     - {fileID: 3663357378009383461, guid: 02a25a79243e4594388ffb484d86ba75, type: 3}
     - {fileID: 4986186270473320130, guid: 02a25a79243e4594388ffb484d86ba75, type: 3}

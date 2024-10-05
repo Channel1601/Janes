@@ -3,8 +3,11 @@ using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
+    public AudioSource audioSource;
+
     [Header("Game Over")]
     [SerializeField] private GameObject gameOverScreen;
+    [SerializeField] private AudioClip gameOverMusic;
     
     [Header("Pause")]
     [SerializeField] private GameObject pauseScreen;
@@ -31,6 +34,7 @@ public class UIManager : MonoBehaviour
     public void GameOver()
     {
         gameOverScreen.SetActive(true);
+        audioSource.Stop();
     }
 
     public void MainMenu()
@@ -51,12 +55,15 @@ public class UIManager : MonoBehaviour
     public void PauseGame(bool status)
     {
         pauseScreen.SetActive(status);
+        audioSource.Pause();
 
-        if (status)
+        if (status){
             Time.timeScale = 0;
-            
-        else    
+        }
+        else{    
+            audioSource.Play();
             Time.timeScale = 1;
+        }
 
     }
 
