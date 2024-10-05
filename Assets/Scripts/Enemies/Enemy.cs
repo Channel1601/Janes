@@ -38,7 +38,6 @@ public class Enemy : MonoBehaviour
             {
                 cooldownTimer = 0;
                 anim.SetTrigger("closeAttack");
-                SoundManager.instance.PlaySound(meleeSound);
             }
         }
     }
@@ -51,7 +50,7 @@ public class Enemy : MonoBehaviour
         if(hit.collider != null)
             playerHealth = hit.transform.GetComponent<Health>();
 
-        return hit.collider != null;
+        return hit.collider != null;        
     }
 
     private void OnDrawGizmos()
@@ -72,6 +71,10 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    private void PlayAudio()
+    {
+        SoundManager.instance.PlaySound(meleeSound);
+    }
     private void RemoveCollider(){
         GetComponent<BoxCollider2D>().enabled = false;
     }

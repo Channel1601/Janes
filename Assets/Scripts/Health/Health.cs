@@ -3,9 +3,6 @@ using System.Collections;
 
 public class Health : MonoBehaviour
 {
-    [Header("Audio")]
-    [SerializeField] private AudioClip deathSound;
-
     [Header("Other")]
     [SerializeField] public float startingHealth;
     
@@ -65,7 +62,6 @@ public class Health : MonoBehaviour
                     GetComponent<RangedEnemy>().enabled = false;
 
                 dead = true;
-                SoundManager.instance.PlaySound(deathSound);
             }
         }
     }

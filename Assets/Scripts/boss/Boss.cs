@@ -12,6 +12,9 @@ public class Boss : MonoBehaviour
     public Health health;
     public float stageTwoHealth;
     public GameObject endScreen;
+    public int currentLevel;
+    public AudioSource audioSource;
+    public AudioClip gameOverMusic;
 
     [Header("Distance")]
     public Transform ninjaPos;
@@ -71,7 +74,6 @@ public class Boss : MonoBehaviour
             anim.SetTrigger("stageTwo");
         }
 
-        Debug.Log(transform.position.y);
         transform.position = Vector3.MoveTowards(transform.position, targetPosition, 20 * Time.deltaTime);
 
         distance = Mathf.Abs(transform.position.x - ninjaPos.position.x);
@@ -177,6 +179,12 @@ public class Boss : MonoBehaviour
     private void LevelDone()
     {
         endScreen.SetActive(true);
+        audioSource.Stop();
+        audioSource.clip = gameOverMusic;
+        audioSource.Play();
+
+        PlayerPrefs.SetInt("Level" + currentLevel + "Completed", 1);
+        PlayerPrefs.Save();
     }
 
     private void Remove()
