@@ -3,9 +3,9 @@ using System.Collections;
 
 public class Health : MonoBehaviour
 {
-    [Header("Other")]
     [SerializeField] public float startingHealth;
-    
+    public InterstitialAdExample adManager;
+
     private UIManager uiManager;  
     
     public float currentHealth { get; private set; }
@@ -41,6 +41,7 @@ public class Health : MonoBehaviour
 
                 //Player
                 if(GetComponent<movement>() != null){
+                    adManager.OnCharacterDeath();
                     GetComponent<movement>().enabled = false;
                     ObstacleMovement[] scripts = FindObjectsOfType<ObstacleMovement>();
                     foreach (ObstacleMovement script in scripts)
