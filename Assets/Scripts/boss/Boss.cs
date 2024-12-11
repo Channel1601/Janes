@@ -44,6 +44,8 @@ public class Boss : MonoBehaviour
     public GameObject stageOneColl;
     public GameObject stageTwoColl;
 
+    [Header("Ads")]
+    public VictoryBannerAds bannerAds;
     private Vector3 targetPosition;
     private float distance;
     private bool specbooUp = false;
@@ -179,6 +181,7 @@ public class Boss : MonoBehaviour
     private void LevelDone()
     {
         endScreen.SetActive(true);
+        bannerAds.ShowVictoryBanner();
         audioSource.Stop();
         audioSource.clip = gameOverMusic;
         audioSource.Play();
