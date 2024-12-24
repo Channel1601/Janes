@@ -19,7 +19,7 @@ public class Health : MonoBehaviour
     {
         currentHealth = startingHealth;
         anim = GetComponent<Animator>();
-        uiManager = FindObjectOfType<UIManager>(); 
+        uiManager = FindFirstObjectByType<UIManager>(); 
     }
 
     public void TakeDamage(float _damage)
@@ -43,12 +43,12 @@ public class Health : MonoBehaviour
                 if(GetComponent<movement>() != null){
                     adManager.OnCharacterDeath();
                     GetComponent<movement>().enabled = false;
-                    ObstacleMovement[] scripts = FindObjectsOfType<ObstacleMovement>();
+                    ObstacleMovement[] scripts = FindObjectsByType<ObstacleMovement>(FindObjectsSortMode.None);
                     foreach (ObstacleMovement script in scripts)
                     {
                         script.enabled = false;
                     }
-                    DetectMovement[] scrips = FindObjectsOfType<DetectMovement>();
+                    DetectMovement[] scrips = FindObjectsByType<DetectMovement>(FindObjectsSortMode.None);
                     foreach (DetectMovement script in scrips)
                     {
                         script.enabled = false;

@@ -39,13 +39,13 @@ public class BossProjectile : EnemyDamage
     private IEnumerator Nado(bool state)
     {
         yield return new WaitForSeconds(0.5f);
-        ObstacleMovement[] scripts = FindObjectsOfType<ObstacleMovement>();
+        ObstacleMovement[] scripts = FindObjectsByType<ObstacleMovement>(FindObjectsSortMode.None);
         foreach (ObstacleMovement script in scripts)
         {
             script.enabled = state;
         }
         
-        DetectMovement[] scrips = FindObjectsOfType<DetectMovement>();
+        DetectMovement[] scrips = FindObjectsByType<DetectMovement>(FindObjectsSortMode.None);
         foreach (DetectMovement script in scrips)
         {
             script.enabled = state;

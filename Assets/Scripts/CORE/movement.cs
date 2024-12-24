@@ -35,9 +35,9 @@ public class movement : MonoBehaviour
         }
 
          //Make fall faster upright
-        if (Ninja.velocity.y < 0 && transform.localScale.x > 0)
+        if (Ninja.linearVelocity.y < 0 && transform.localScale.x > 0)
         {
-            Ninja.velocity += Vector2.up * (Physics2D.gravity.y * fallMultiplier * Time.deltaTime);
+            Ninja.linearVelocity += Vector2.up * (Physics2D.gravity.y * fallMultiplier * Time.deltaTime);
         }
 
         if(!gSwitch)
@@ -66,7 +66,7 @@ public class movement : MonoBehaviour
         if (coyoteTimeCounter > 0f && transform.localScale.x > 0)
         {
             animator.SetTrigger("jump");
-            Ninja.velocity = new Vector2(Ninja.velocity.x, jump);
+            Ninja.linearVelocity = new Vector2(Ninja.linearVelocity.x, jump);
             coyoteTimeCounter = 0;
         }
 
@@ -74,7 +74,7 @@ public class movement : MonoBehaviour
         if (coyoteTimeCounter > 0f && transform.localScale.x < 0 )
         {
             animator.SetTrigger("jump");
-            Ninja.velocity = new Vector2(Ninja.velocity.x, -jump);
+            Ninja.linearVelocity = new Vector2(Ninja.linearVelocity.x, -jump);
             coyoteTimeCounter = 0;
         }
     }
@@ -83,7 +83,7 @@ public class movement : MonoBehaviour
     {
         animator.SetTrigger("GravitySwitch");
         Ninja.gravityScale *= -1;
-        Ninja.velocity = new Vector2(Ninja.velocity.x, gForce * gSwitchForce);
+        Ninja.linearVelocity = new Vector2(Ninja.linearVelocity.x, gForce * gSwitchForce);
         transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y , transform.localScale.z);
         bEnable.gameObject.SetActive(true);
         bDisable.gameObject.SetActive(false);
