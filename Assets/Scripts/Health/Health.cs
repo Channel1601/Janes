@@ -4,10 +4,14 @@ using System.Collections;
 public class Health : MonoBehaviour
 {
     [SerializeField] public float startingHealth;
-    public InterstitialAdExample adManager;
+    //public InterstitialAdExample adManager;
+    public LevelPlaySample levelPlaySample;
+    private static int deathCount = 0;
+    private static int nextAdThreshold;
 
-    private UIManager uiManager;  
-    
+    // DeathCount deathCount;
+    private UIManager uiManager;
+
     public float currentHealth { get; private set; }
     private Animator anim;
     private bool dead;
@@ -19,12 +23,13 @@ public class Health : MonoBehaviour
     {
         currentHealth = startingHealth;
         anim = GetComponent<Animator>();
-        uiManager = FindFirstObjectByType<UIManager>(); 
+        uiManager = FindFirstObjectByType<UIManager>();
+        SetNextAdThreshold(); 
     }
 
     public void TakeDamage(float _damage)
     {
-        if(canHurt) return;
+        if (canHurt) return;
 
         currentHealth = Mathf.Clamp(currentHealth - _damage, 0, startingHealth);
 
@@ -32,7 +37,7 @@ public class Health : MonoBehaviour
         {
             anim.SetTrigger("hurt");
         }
-        
+
         else
         {
             if (!dead)
@@ -40,8 +45,10 @@ public class Health : MonoBehaviour
                 anim.SetTrigger("dead");
 
                 //Player
-                if(GetComponent<movement>() != null){
-                    adManager.OnCharacterDeath();
+                if (GetComponent<movement>() != null)
+                {
+                    //adManager.OnCharacterDeath();
+                    OnCharacterDeath();
                     GetComponent<movement>().enabled = false;
                     ObstacleMovement[] scripts = FindObjectsByType<ObstacleMovement>(FindObjectsSortMode.None);
                     foreach (ObstacleMovement script in scripts)
@@ -56,10 +63,10 @@ public class Health : MonoBehaviour
                     StartCoroutine(GameOverShow());
                 }
                 //Enemy
-                if(GetComponentInParent<EnemyPatrol>() != null)
+                if (GetComponentInParent<EnemyPatrol>() != null)
                     GetComponentInParent<EnemyPatrol>().enabled = false;
-                
-                if(GetComponent<RangedEnemy>() != null)
+
+                if (GetComponent<RangedEnemy>() != null)
                     GetComponent<RangedEnemy>().enabled = false;
 
                 dead = true;
@@ -67,11 +74,13 @@ public class Health : MonoBehaviour
         }
     }
 
-    public void AddHealth(float _value){
+    public void AddHealth(float _value)
+    {
         currentHealth = Mathf.Clamp(currentHealth + _value, 0, startingHealth);
     }
 
-    private void Deactivate(){
+    private void Deactivate()
+    {
         gameObject.SetActive(false);
     }
 
@@ -81,14 +90,34 @@ public class Health : MonoBehaviour
         {
             TakeDamage(2);
             gameObject.GetComponent<Renderer>().enabled = false;
-        }          
-     }
+        }
+    }
 
     private IEnumerator GameOverShow()
     {
         yield return new WaitForSeconds(0.75f);
         Time.timeScale = 0;
         uiManager.GameOver();
-     }
+    }
+     
+    private void OnCharacterDeath()
+    {
+        Debug.Log(deathCount);
+        deathCount++;
+
+        if (deathCount >= nextAdThreshold)
+        {
+            levelPlaySample.InterAdShow();
+            levelPlaySample.BannerAdHide();
+            Debug.Log("Set an ad");
+            deathCount = 0; // Reset the death counter after showing the ad
+            SetNextAdThreshold();
+        }
+    }
+
+    private void SetNextAdThreshold()
+    {
+        nextAdThreshold = Random.Range(3, 6); // Random number between 3 and 5
+    }
 
  }
