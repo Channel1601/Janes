@@ -4,8 +4,9 @@ using UnityEngine.SceneManagement;
 public class UIManager : MonoBehaviour
 {
     public AudioSource audioSource;
-    public PauseBannerAds pauseBannerAds;
-    public DeathBannerAds deathBannerAds;
+    public LevelPlaySample levelPlaySample;
+    //public PauseBannerAds pauseBannerAds;
+    //public DeathBannerAds deathBannerAds;
 
     [Header("Game Over")]
     [SerializeField] private GameObject gameOverScreen;
@@ -36,7 +37,8 @@ public class UIManager : MonoBehaviour
     public void GameOver()
     {
         gameOverScreen.SetActive(true);
-        deathBannerAds.ShowDeathBanner();
+        // deathBannerAds.ShowDeathBanner();
+       levelPlaySample.BannerAdShow();
         audioSource.Stop();
     }
 
@@ -44,7 +46,8 @@ public class UIManager : MonoBehaviour
     {
         Time.timeScale = 1;
         SceneManager.LoadScene(1);
-        pauseBannerAds.HideBannerAd();
+        // pauseBannerAds.HideBannerAd();
+       levelPlaySample.BannerAdHide();
     }
 
     public void Restart()
@@ -52,7 +55,7 @@ public class UIManager : MonoBehaviour
         if(Time.timeScale == 0) Time.timeScale = 1;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         gameOverScreen.SetActive(false);
-        pauseBannerAds.HideBannerAd();
+       // pauseBannerAds.HideBannerAd();
     }
    #endregion 
 
@@ -62,14 +65,18 @@ public class UIManager : MonoBehaviour
         pauseScreen.SetActive(status);
         audioSource.Pause();
 
-        if (status){
+        if (status)
+        {
             Time.timeScale = 0;
-            pauseBannerAds.ShowPauseBanner();
+            //pauseBannerAds.ShowPauseBanner();
+            levelPlaySample.BannerAdShow();
         }
-        else{    
+        else
+        {
             audioSource.Play();
             Time.timeScale = 1;
-            pauseBannerAds.HideBannerAd();
+            // pauseBannerAds.HideBannerAd();
+            levelPlaySample.BannerAdHide();
         }
 
     }
