@@ -4,7 +4,6 @@ using UnityEngine;
 // This sample demonstrates how to use the LevelPlay SDK to load and show ads in a Unity game.
 public class LevelPlaySample : MonoBehaviour
 {
-
     private LevelPlayBannerAd bannerAd;
     private LevelPlayInterstitialAd interstitialAd;
     private LevelPlayRewardedAd rewardedVideoAd;
@@ -38,7 +37,7 @@ public class LevelPlaySample : MonoBehaviour
         rewardedVideoAd.OnAdLoaded += RewardedVideoOnLoadedEvent;
         rewardedVideoAd.OnAdLoadFailed += RewardedVideoOnAdLoadFailedEvent;
         rewardedVideoAd.OnAdDisplayed += RewardedVideoOnAdDisplayedEvent;
-        rewardedVideoAd.OnAdDisplayFailed += RewardedVideoOnAdDisplayedFailedEvent;
+        rewardedVideoAd.OnAdDisplayFailed += RewardedVideoOnAdDisplayedFailedEvent; // Updated
         rewardedVideoAd.OnAdRewarded += RewardedVideoOnAdRewardedEvent;
         rewardedVideoAd.OnAdClicked += RewardedVideoOnAdClickedEvent;
         rewardedVideoAd.OnAdClosed += RewardedVideoOnAdClosedEvent;
@@ -51,7 +50,7 @@ public class LevelPlaySample : MonoBehaviour
         bannerAd.OnAdLoaded += BannerOnAdLoadedEvent;
         bannerAd.OnAdLoadFailed += BannerOnAdLoadFailedEvent;
         bannerAd.OnAdDisplayed += BannerOnAdDisplayedEvent;
-        bannerAd.OnAdDisplayFailed += BannerOnAdDisplayFailedEvent;
+        bannerAd.OnAdDisplayFailed += BannerOnAdDisplayFailedEvent; // Updated
         bannerAd.OnAdClicked += BannerOnAdClickedEvent;
         bannerAd.OnAdCollapsed += BannerOnAdCollapsedEvent;
         bannerAd.OnAdLeftApplication += BannerOnAdLeftApplicationEvent;
@@ -64,25 +63,22 @@ public class LevelPlaySample : MonoBehaviour
         interstitialAd.OnAdLoaded += InterstitialOnAdLoadedEvent;
         interstitialAd.OnAdLoadFailed += InterstitialOnAdLoadFailedEvent;
         interstitialAd.OnAdDisplayed += InterstitialOnAdDisplayedEvent;
-        interstitialAd.OnAdDisplayFailed += InterstitialOnAdDisplayFailedEvent;
+        interstitialAd.OnAdDisplayFailed += InterstitialOnAdDisplayFailedEvent; // Updated
         interstitialAd.OnAdClicked += InterstitialOnAdClickedEvent;
         interstitialAd.OnAdClosed += InterstitialOnAdClosedEvent;
         interstitialAd.OnAdInfoChanged += InterstitialOnAdInfoChangedEvent;
     }
 
-    
     public void BannerAdShow()
     {
         bannerAd.LoadAd();
     }
 
-    
     public void BannerAdHide()
     {
         bannerAd.HideAd();
     }
 
-    
     public void InterAdLoad()
     {
         interstitialAd.LoadAd();
@@ -93,7 +89,6 @@ public class LevelPlaySample : MonoBehaviour
         interstitialAd.ShowAd();
     }
 
-    
     #region Init callback handlers
 
     void SdkInitializationCompletedEvent(LevelPlayConfiguration config)
@@ -124,12 +119,12 @@ public class LevelPlaySample : MonoBehaviour
     {
         Debug.Log($"[LevelPlaySample] Received RewardedVideoOnAdDisplayedEvent With AdInfo: {adInfo}");
     }
-#pragma warning disable 0618
-    void RewardedVideoOnAdDisplayedFailedEvent(LevelPlayAdDisplayInfoError error)
+
+    void RewardedVideoOnAdDisplayedFailedEvent(LevelPlayAdInfo adInfo, LevelPlayAdError error)
     {
-        Debug.Log($"[LevelPlaySample] Received RewardedVideoOnAdDisplayedFailedEvent With Error: {error}");
+        Debug.LogError($"[LevelPlaySample] RewardedVideo OnAdDisplayFailed with AdInfo: {adInfo} Error: {error}");
     }
-#pragma warning restore 0618
+
     void RewardedVideoOnAdRewardedEvent(LevelPlayAdInfo adInfo, LevelPlayReward reward)
     {
         Debug.Log($"[LevelPlaySample] Received RewardedVideoOnAdRewardedEvent With AdInfo: {adInfo} and Reward: {reward}");
@@ -151,6 +146,7 @@ public class LevelPlaySample : MonoBehaviour
     }
 
     #endregion
+
     #region AdInfo Interstitial
 
     void InterstitialOnAdLoadedEvent(LevelPlayAdInfo adInfo)
@@ -167,12 +163,12 @@ public class LevelPlaySample : MonoBehaviour
     {
         Debug.Log($"[LevelPlaySample] Received InterstitialOnAdDisplayedEvent With AdInfo: {adInfo}");
     }
-#pragma warning disable 0618
-    void InterstitialOnAdDisplayFailedEvent(LevelPlayAdDisplayInfoError infoError)
+
+    void InterstitialOnAdDisplayFailedEvent(LevelPlayAdInfo adInfo, LevelPlayAdError error)
     {
-        Debug.Log($"[LevelPlaySample] Received InterstitialOnAdDisplayFailedEvent With InfoError: {infoError}");
+        Debug.LogError($"[LevelPlaySample] Interstitial OnAdDisplayFailed with AdInfo: {adInfo} Error: {error}");
     }
-#pragma warning restore 0618
+
     void InterstitialOnAdClickedEvent(LevelPlayAdInfo adInfo)
     {
         Debug.Log($"[LevelPlaySample] Received InterstitialOnAdClickedEvent With AdInfo: {adInfo}");
@@ -211,12 +207,12 @@ public class LevelPlaySample : MonoBehaviour
     {
         Debug.Log($"[LevelPlaySample] Received BannerOnAdDisplayedEvent With AdInfo: {adInfo}");
     }
-#pragma warning disable 0618
-    void BannerOnAdDisplayFailedEvent(LevelPlayAdDisplayInfoError adInfoError)
+
+    void BannerOnAdDisplayFailedEvent(LevelPlayAdInfo adInfo, LevelPlayAdError error)
     {
-        Debug.Log($"[LevelPlaySample] Received BannerOnAdDisplayFailedEvent With AdInfoError: {adInfoError}");
+        Debug.LogError($"[LevelPlaySample] Banner OnAdDisplayFailed with AdInfo: {adInfo} Error: {error}");
     }
-#pragma warning restore 0618
+
     void BannerOnAdCollapsedEvent(LevelPlayAdInfo adInfo)
     {
         Debug.Log($"[LevelPlaySample] Received BannerOnAdCollapsedEvent With AdInfo: {adInfo}");

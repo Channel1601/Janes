@@ -1,9 +1,9 @@
 {
-    "m_SelectedDeviceId": "RZ8RA0KRS1P",
+    "m_SelectedDeviceId": "emulator-5554",
     "m_SelectedProcess": {
-        "deviceId": "",
-        "name": "",
-        "processId": 0,
+        "deviceId": "emulator-5554",
+        "name": "com.JanesInc.ShurikenSpint",
+        "processId": 9150,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -12,6 +12,12 @@
             "deviceId": "RZ8RA0KRS1P",
             "name": "com.sec.android.app.launcher",
             "processId": 2256,
+            "exited": false
+        },
+        {
+            "deviceId": "emulator-5554",
+            "name": "com.JanesInc.ShurikenSpint",
+            "processId": 9150,
             "exited": false
         }
     ],
