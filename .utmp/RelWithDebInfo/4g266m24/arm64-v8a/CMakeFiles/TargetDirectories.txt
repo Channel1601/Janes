@@ -1,0 +1,5 @@
+C:/UnityProjects/Janes/.utmp/RelWithDebInfo/4g266m24/arm64-v8a/CMakeFiles/edit_cache.dir
+C:/UnityProjects/Janes/.utmp/RelWithDebInfo/4g266m24/arm64-v8a/CMakeFiles/rebuild_cache.dir
+C:/UnityProjects/Janes/.utmp/RelWithDebInfo/4g266m24/arm64-v8a/FramePacing/CMakeFiles/swappywrapper.dir
+C:/UnityProjects/Janes/.utmp/RelWithDebInfo/4g266m24/arm64-v8a/FramePacing/CMakeFiles/edit_cache.dir
+C:/UnityProjects/Janes/.utmp/RelWithDebInfo/4g266m24/arm64-v8a/FramePacing/CMakeFiles/rebuild_cache.dir
