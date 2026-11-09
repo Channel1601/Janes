@@ -8,11 +8,15 @@ public class LevelSelect : MonoBehaviour
     [SerializeField] private Button playButton;
 
     [Header("Level Images")]
-    [SerializeField] private GameObject level1Cover;
+    [SerializeField] private GameObject levelCover;
+    [SerializeField] private GameObject level1Img;
+    [SerializeField] private GameObject level2Img;
 
     private void Awake()
     {
-        level1Cover.gameObject.SetActive(true);
+        levelCover.gameObject.SetActive(true);
+        level1Img.gameObject.SetActive(false);
+        level2Img.gameObject.SetActive(false);
         playButton.interactable = false; 
     }
 
@@ -24,7 +28,9 @@ public class LevelSelect : MonoBehaviour
     #region Level 1
     public void Level1Select()
     {
-        level1Cover.gameObject.SetActive(false);
+        levelCover.gameObject.SetActive(false);
+        level2Img.gameObject.SetActive(false);
+        level1Img.gameObject.SetActive(true);
         playButton.interactable = true; 
     }
 
@@ -32,6 +38,22 @@ public class LevelSelect : MonoBehaviour
     {
         Time.timeScale = 1;
         SceneManager.LoadScene(2);
+    }
+    #endregion
+
+    #region Level 2
+    public void Level2Select()
+    {
+        levelCover.gameObject.SetActive(false);
+        level2Img.gameObject.SetActive(true);
+        level1Img.gameObject.SetActive(false);
+        playButton.interactable = true; 
+    }
+
+    public void Level2Play()
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene(3);
     }
     #endregion
 }
